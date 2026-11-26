@@ -1,4 +1,5 @@
-import { ChevronRight, Info } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Info } from 'lucide-react';
+import { useState } from 'react';
 import Reveal from './Reveal.jsx';
 import cardAcid from '../assets/images/sequence-anim/card-acid.webp';
 import cardMotility from '../assets/images/sequence-anim/card-motility.webp';
@@ -68,6 +69,9 @@ const STEPS = [
 ];
 
 export default function WorkedExample() {
+  const [activeStep, setActiveStep] = useState(0);
+  const goToStep = (step) => setActiveStep((step + STEPS.length) % STEPS.length);
+
   return (
     <section id="example" className="py-14 sm:py-20" aria-labelledby="example-title">
       <div className="container-site">
@@ -81,7 +85,7 @@ export default function WorkedExample() {
           </p>
         </Reveal>
 
-        <ol className="mt-10 grid gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-10">
+        <ol className="example-slides mt-10 grid gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-10" style={{ "--active-slide": activeStep }}>
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.tag} delay={i * 0.08} className="relative">
               <div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-[#ECE8FB]">
@@ -107,6 +111,28 @@ export default function WorkedExample() {
             </Reveal>
           ))}
         </ol>
+
+        <div className="example-carousel-controls" aria-label="Example concept slides">
+          <button type="button" onClick={() => goToStep(activeStep - 1)} aria-label="Previous example" className="example-arrow">
+            <ChevronLeft size={18} aria-hidden="true" />
+          </button>
+          <div className="example-dots" role="tablist" aria-label="Choose example concept">
+            {STEPS.map((step, i) => (
+              <button
+                key={step.tag}
+                type="button"
+                role="tab"
+                aria-label={`Show slide ${i + 1}: ${step.tag}`}
+                aria-selected={activeStep === i}
+                onClick={() => goToStep(i)}
+                className={activeStep === i ? 'example-dot active' : 'example-dot'}
+              />
+            ))}
+          </div>
+          <button type="button" onClick={() => goToStep(activeStep + 1)} aria-label="Next example" className="example-arrow">
+            <ChevronRight size={18} aria-hidden="true" />
+          </button>
+        </div>
 
         <p className="mx-auto mt-6 flex max-w-3xl items-start justify-center gap-2 text-center text-sm text-navy-300">
           <Info size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
