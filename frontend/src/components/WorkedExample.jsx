@@ -114,7 +114,12 @@ export default function WorkedExample() {
           </p>
         </Reveal>
 
-        <div\n          className="example-carousel-viewport"\n          onTouchStart={handleTouchStart}\n          onTouchEnd={handleTouchEnd}\n          onTouchCancel={handleTouchCancel}\n        >
+        <div
+          className="example-carousel-viewport"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchCancel}
+        >
           <ol className="example-slides mt-10 grid gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-10" style={{ "--active-slide": activeStep }}>
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.tag} delay={i * 0.08} className="relative">
