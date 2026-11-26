@@ -13,12 +13,12 @@ export default function WhyActiVA() {
           </p>
         </Reveal>
 
-        <ul className="grid grid-cols-6 gap-3 sm:gap-4">
+        <ul className="grid gap-3 sm:gap-4" style={{ gridTemplateColumns: "repeat(6, minmax(0, 1fr))" }}>
           {BENEFITS.map((b, i) => {
             const Icon = b.icon;
             const cardGridClass = i < 3 ? 'col-span-2' : 'col-span-3';
             return (
-              <Reveal as="li" key={b.title} delay={i * 0.06} className={cardGridClass}>
+              <Reveal as="li" key={b.title} delay={i * 0.06} className={cardGridClass} style={{ gridColumn: i < 3 ? "span 2 / span 2" : "span 3 / span 3" }}>
                 <div className={`flex h-full flex-col items-center justify-center rounded-3xl bg-gradient-to-br ${b.tint} px-4 py-6 text-center shadow-card ring-1 ring-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover`}>
                   <Icon size={40} strokeWidth={1.7} className={b.iconColor} aria-hidden="true" />
                   <h3 className="mt-3 text-lg font-extrabold text-navy">{b.title}</h3>
