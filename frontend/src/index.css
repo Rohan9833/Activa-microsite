@@ -405,11 +405,15 @@
     font-size: 10px;
     line-height: 1.25;
   }
+  #example .example-carousel-viewport {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+  }
   #example ol {
     display: flex;
     gap: 0;
     margin-top: 10px;
-    overflow: hidden;
     border-radius: 16px;
     box-shadow: 0 5px 18px rgba(53, 35, 113, .08);
   }
@@ -451,16 +455,17 @@
     overflow: hidden;
   }
   #example ol.example-slides {
-    width: 100%;
-    transform: translateX(calc(var(--active-slide) * -100%));
+    width: 300%;
+    max-width: none;
+    transform: translateX(calc(var(--active-slide) * -33.333333%));
     transition: transform 320ms cubic-bezier(.22,.61,.36,1);
     overflow: visible;
     box-shadow: none;
   }
   #example ol > li {
     display: block !important;
-    flex: 0 0 100%;
-    width: 100%;
+    flex: 0 0 33.333333%;
+    width: 33.333333%;
   }
   #example ol > li > div {
     box-shadow: 0 5px 18px rgba(53, 35, 113, .08);
