@@ -3,8 +3,8 @@
 Product marketing microsite for **ActiVA**, a digiLATERAL solution: phygital, interactive in-clinic detailing for pharmaceutical brands.
 
 - **Frontend:** React 18, Vite 5, Tailwind CSS 3, Framer Motion, Lucide icons, self-hosted Plus Jakarta Sans
-- **Backend:** Node.js (18.18+), Express 4, MongoDB with Mongoose 8
-- **Enquiries:** `POST /api/demo-requests` validates the enquiry and stores it in MongoDB (there is no public read endpoint)
+- **Backend:** Node.js (18.18+), Express 4, Nodemailer
+- **Enquiries:** `POST /api/demo-requests` validates the form and emails the enquiry; nothing is stored in a database
 
 ```
 activa-microsite/
@@ -21,10 +21,10 @@ activa-microsite/
 │   ├── index.html         SEO title, meta description, Open Graph, favicon
 │   └── .env.example
 ├── backend/
-│   ├── config/            env loader, MongoDB connection
+│   ├── config/            environment loader
 │   ├── controllers/       demoRequestController.js
 │   ├── middleware/        validation and sanitising, rate limiting, error handler
-│   ├── models/            DemoRequest.js
+│   ├── services/          SMTP mailer
 │   ├── routes/            demo requests, health
 │   ├── app.js             Express app (helmet, CORS, routes)
 │   ├── server.js          entry point
@@ -35,14 +35,14 @@ activa-microsite/
 ## 1. Prerequisites
 
 - Node.js 18.18 or newer (20 LTS recommended)
-- MongoDB: a local install (`mongodb://127.0.0.1:27017/activa`) or a MongoDB Atlas connection string
+
 
 ## 2. Run locally
 
 ```bash
 # Backend (terminal 1)
 cd backend
-cp .env.example .env          # then set MONGODB_URI
+cp .env.example .env          # then configure SMTP/email variables
 npm install
 npm run dev                   # http://localhost:5000  (GET /api/health)
 
@@ -59,8 +59,8 @@ During development, Vite proxies `/api/*` to `http://localhost:5000`, so the for
 
 | Method | Path | Purpose |
 |---|---|---|
-| `GET` | `/api/health` | Returns `200` when the API is up and MongoDB is connected, `503` otherwise |
-| `POST` | `/api/demo-requests` | Stores a demo enquiry |
+| `GET` | `/api/health` | Returns `200` when email settings are configured, `503` otherwise |
+| `POST` | `/api/demo-requests` | Emails the demo enquiry to the configured recipient |
 
 **Request**
 
@@ -77,7 +77,7 @@ During development, Vite proxies `/api/*` to `http://localhost:5000`, so the for
 
 **Responses**
 
-- `201` `{ success: true, message, data: { id, submittedAt } }`
+- `200` `{ success: true, message }` when the email sends successfully
 - `422` `{ success: false, message, errors: [{ field, message }] }` for a validation failure
 - `429` when there are too many requests (default: 10 per IP per 15 minutes)
 - `400` for malformed JSON, `403` for a disallowed origin, `413` for an oversized payload, `503` when the database is unavailable
@@ -88,9 +88,7 @@ During development, Vite proxies `/api/*` to `http://localhost:5000`, so the for
 - HTML tags and control characters are stripped, and the email is lower-cased
 - Only whitelisted string fields are accepted, which blocks NoSQL operator injection such as `{"$gt": ""}`
 - `helmet` security headers, a 10 kb JSON body limit, a CORS allow-list, rate limiting, and a hidden honeypot field against bots
-- The submission timestamp is stored as `createdAt`. IP, user agent and referrer are stored in `meta`
-- There is no endpoint that lists or reads enquiries. View them in MongoDB Compass, Atlas, or `mongosh`:
-  `db.demorequests.find().sort({ createdAt: -1 })`
+- Enquiries are emailed directly and are not stored in MongoDB or another database
 
 The frontend shows the success message only after a confirmed `2xx` response. Network failures, timeouts and server errors show an error message instead.
 
@@ -100,9 +98,14 @@ The frontend shows the success message only after a confirmed `2xx` response. Ne
 
 | Variable | Default | Notes |
 |---|---|---|
-| `MONGODB_URI` | — | Required. Never commit the real value |
 | `PORT` | `5000` | |
 | `NODE_ENV` | `development` | Set to `production` in production (hides error details) |
+| `SMTP_HOST` | — | SMTP server hostname |
+| `SMTP_PORT` | `587` | SMTP port |
+| `SMTP_SECURE` | `false` | Set `true` for implicit TLS (commonly port 465) |
+| `SMTP_USER` / `SMTP_PASS` | — | SMTP authentication credentials |
+| `MAIL_FROM` | `SMTP_USER` | Sender address |
+| `DEMO_RECIPIENT_EMAIL` | — | Address where demo requests should arrive |
 | `CORS_ORIGINS` | `http://localhost:5173` | Comma-separated list of allowed browser origins (same-origin is always allowed) |
 | `RATE_LIMIT_WINDOW_MINUTES` / `RATE_LIMIT_MAX` | `15` / `10` | Limit for enquiry submissions per IP |
 | `TRUST_PROXY` | `0` | Set to `1` behind Nginx or a PaaS load balancer so the rate limiter sees real client IPs |
