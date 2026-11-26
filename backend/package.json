@@ -2,7 +2,7 @@
   "name": "activa-microsite-backend",
   "version": "1.0.0",
   "private": true,
-  "description": "ActiVA microsite API — stores Request a Demo enquiries in MongoDB",
+  "description": "ActiVA microsite API — emails Request a Demo enquiries",
   "main": "server.js",
   "type": "module",
   "engines": { "node": ">=18.18" },
@@ -16,7 +16,7 @@
     "express": "^4.21.1",
     "express-rate-limit": "^7.4.1",
     "helmet": "^8.0.0",
-    "mongoose": "^8.8.0",
+    "nodemailer": "^6.9.16",
     "validator": "^13.12.0"
   }
 }
