@@ -1,9 +1,11 @@
 import { ChevronLeft, ChevronRight, Info } from "lucide-react";
 import { useRef, useState } from "react";
 import Reveal from "./Reveal.jsx";
+
 import cardAcid from "../assets/images/sequence-anim/card-acid.webp";
 import cardMotility from "../assets/images/sequence-anim/card-motility.webp";
 import cardPersistence from "../assets/images/sequence-anim/card-persistence.webp";
+
 import ipadDims from "../assets/images/ipad-sequence.webp";
 import ipadDims2x from "../assets/images/ipad-sequence@2x.webp";
 import ipadRajesh from "../assets/images/ipad-rajesh.webp";
@@ -16,9 +18,9 @@ function SymptomCards() {
       aria-hidden="true"
     >
       {[
-        [cardAcid, "-rotate-[10deg] translate-x-[38%]", 1],
-        [cardMotility, "z-10", 2],
-        [cardPersistence, "rotate-[10deg] -translate-x-[38%]", 1],
+        [cardAcid, "-rotate-[10deg] translate-x-[38%]"],
+        [cardMotility, "z-10"],
+        [cardPersistence, "rotate-[10deg] -translate-x-[38%]"],
       ].map(([src, cls], i) => (
         <img
           key={i}
@@ -73,30 +75,53 @@ const STEPS = [
 
 export default function WorkedExample() {
   const [activeStep, setActiveStep] = useState(0);
+  const [trackPosition, setTrackPosition] = useState(1);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
+
   const touchStartX = useRef(null);
   const touchStartY = useRef(null);
-  const goToStep = (step) =>
-    setActiveStep(Math.max(0, Math.min(STEPS.length - 1, step)));
+
+  const goToStep = (step) => {
+    const next = (step + STEPS.length) % STEPS.length;
+
+    setActiveStep(next);
+
+    // Seamless loop using cloned boundary slides.
+    if (activeStep === STEPS.length - 1 && next === 0) {
+      setTrackPosition(STEPS.length + 1);
+    } else if (activeStep === 0 && next === STEPS.length - 1) {
+      setTrackPosition(0);
+    } else {
+      setTrackPosition(next + 1);
+    }
+  };
 
   const handleTouchStart = (event) => {
     const touch = event.touches[0];
+
     touchStartX.current = touch.clientX;
     touchStartY.current = touch.clientY;
   };
 
   const handleTouchEnd = (event) => {
-    if (touchStartX.current === null || touchStartY.current === null) return;
+    if (
+      touchStartX.current === null ||
+      touchStartY.current === null
+    ) {
+      return;
+    }
 
     const touch = event.changedTouches[0];
+
     const deltaX = touch.clientX - touchStartX.current;
     const deltaY = touch.clientY - touchStartY.current;
 
-    // Only change slides for a deliberate horizontal swipe, not vertical scrolling.
-    if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
-      setActiveStep((current) => {
-        if (deltaX < 0) return Math.min(current + 1, STEPS.length - 1);
-        return Math.max(current - 1, 0);
-      });
+    // Only trigger when the gesture is clearly horizontal.
+    if (
+      Math.abs(deltaX) > 45 &&
+      Math.abs(deltaX) > Math.abs(deltaY)
+    ) {
+      goToStep(activeStep + (deltaX < 0 ? 1 : -1));
     }
 
     touchStartX.current = null;
@@ -108,6 +133,50 @@ export default function WorkedExample() {
     touchStartY.current = null;
   };
 
+  const handleTrackTransitionEnd = (event) => {
+    // Ignore transitions bubbling from child elements.
+    if (
+      event.target !== event.currentTarget ||
+      !transitionEnabled
+    ) {
+      return;
+    }
+
+    // If we reached the clone of the last slide,
+    // silently jump to the real last slide.
+    if (trackPosition === 0) {
+      setTransitionEnabled(false);
+      setTrackPosition(STEPS.length);
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setTransitionEnabled(true);
+        });
+      });
+    }
+
+    // If we reached the clone of the first slide,
+    // silently jump to the real first slide.
+    else if (trackPosition === STEPS.length + 1) {
+      setTransitionEnabled(false);
+      setTrackPosition(1);
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setTransitionEnabled(true);
+        });
+      });
+    }
+  };
+
+  // Clone last slide before the real slides,
+  // and clone first slide after the real slides.
+  const carouselSlides = [
+    STEPS[STEPS.length - 1],
+    ...STEPS,
+    STEPS[0],
+  ];
+
   return (
     <section
       id="example"
@@ -115,63 +184,107 @@ export default function WorkedExample() {
       aria-labelledby="example-title"
     >
       <div className="container-site">
+
+        {/* Section heading */}
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="eyebrow">Example concept</p>
+
           <h2 id="example-title" className="section-title mt-2">
             One brand story.{" "}
-            <span className="text-gradient">Many patient conversations.</span>
+            <span className="text-gradient">
+              Many patient conversations.
+            </span>
           </h2>
+
           <p className="mt-4 text-lg text-navy-500">
-            How a single ActiVA interaction can turn GERD symptom profiling into
-            a participative discussion.
+            How a single ActiVA interaction can turn GERD symptom
+            profiling into a participative discussion.
           </p>
         </Reveal>
 
+        {/* Carousel viewport */}
         <div
           className="example-carousel-viewport"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchCancel}
         >
+          {/* Sliding track */}
           <ol
-            className="example-slides mt-10 grid gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-10"
-            style={{ "--active-slide": activeStep }}
+            className={`example-slides mt-10 grid gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-10 ${
+              transitionEnabled ? "" : "example-no-transition"
+            }`}
+            style={{
+              "--active-slide": trackPosition,
+            }}
+            onTransitionEnd={handleTrackTransitionEnd}
           >
-            {STEPS.map((s, i) => (
-              <Reveal as="li" key={s.tag} delay={i * 0.08} className="relative">
-                <div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-[#ECE8FB]">
-                  <div className="flex h-[210px] items-center justify-center bg-gradient-to-br from-[#F2F5FF] via-[#F6F2FF] to-[#FCF1FD] px-5">
-                    {s.visual}
+            {carouselSlides.map((s, trackIndex) => {
+              const isClone =
+                trackIndex === 0 ||
+                trackIndex === STEPS.length + 1;
+
+              const stepIndex =
+                (trackIndex - 1 + STEPS.length) %
+                STEPS.length;
+
+              return (
+                <Reveal
+                  as="li"
+                  key={`${trackIndex}-${s.tag}`}
+                  delay={isClone ? 0 : stepIndex * 0.08}
+                  className={
+                    isClone
+                      ? "relative example-slide-clone"
+                      : "relative"
+                  }
+                  aria-hidden={isClone}
+                >
+                  <div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-[#ECE8FB]">
+
+                    {/* Visual */}
+                    <div className="flex h-[210px] items-center justify-center bg-gradient-to-br from-[#F2F5FF] via-[#F6F2FF] to-[#FCF1FD] px-5">
+                      {s.visual}
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 p-6">
+                      <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-brand-violet">
+                        {String(stepIndex + 1).padStart(2, "0")}{" "}
+                        · {s.tag}
+                      </p>
+
+                      <h3 className="mt-2 text-xl font-extrabold text-navy">
+                        {s.title}
+                      </h3>
+
+                      <p className="mt-2 text-[15px] leading-relaxed text-navy-500">
+                        {s.text}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex-1 p-6">
-                    <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-brand-violet">
-                      {String(i + 1).padStart(2, "0")} · {s.tag}
-                    </p>
-                    <h3 className="mt-2 text-xl font-extrabold text-navy">
-                      {s.title}
-                    </h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-navy-500">
-                      {s.text}
-                    </p>
-                  </div>
-                </div>
-                {i < STEPS.length - 1 && (
-                  <ChevronRight
-                    className="absolute -right-[34px] top-[105px] hidden -translate-y-1/2 text-brand-violet lg:block"
-                    size={28}
-                    strokeWidth={2.5}
-                    aria-hidden="true"
-                  />
-                )}
-              </Reveal>
-            ))}
+
+                  {/* Desktop arrow between cards */}
+                  {stepIndex < STEPS.length - 1 && !isClone && (
+                    <ChevronRight
+                      className="absolute -right-[34px] top-[105px] hidden -translate-y-1/2 text-brand-violet lg:block"
+                      size={28}
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                    />
+                  )}
+                </Reveal>
+              );
+            })}
           </ol>
         </div>
 
+        {/* Carousel controls */}
         <div
           className="example-carousel-controls"
           aria-label="Example concept slides"
         >
+          {/* Previous */}
           <button
             type="button"
             onClick={() => goToStep(activeStep - 1)}
@@ -180,6 +293,8 @@ export default function WorkedExample() {
           >
             <ChevronLeft size={18} aria-hidden="true" />
           </button>
+
+          {/* Dots */}
           <div
             className="example-dots"
             role="tablist"
@@ -194,11 +309,15 @@ export default function WorkedExample() {
                 aria-selected={activeStep === i}
                 onClick={() => goToStep(i)}
                 className={
-                  activeStep === i ? "example-dot active" : "example-dot"
+                  activeStep === i
+                    ? "example-dot active"
+                    : "example-dot"
                 }
               />
             ))}
           </div>
+
+          {/* Next */}
           <button
             type="button"
             onClick={() => goToStep(activeStep + 1)}
@@ -209,10 +328,17 @@ export default function WorkedExample() {
           </button>
         </div>
 
+        {/* Disclaimer */}
         <p className="mx-auto mt-6 flex max-w-3xl items-start justify-center gap-2 text-center text-sm text-navy-300">
-          <Info size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
-          Illustrative concept created to demonstrate ActiVA. It is not a client
-          case study, and the patient profiles are fictional.
+          <Info
+            size={16}
+            className="mt-0.5 shrink-0"
+            aria-hidden="true"
+          />
+
+          Illustrative concept created to demonstrate ActiVA. It is
+          not a client case study, and the patient profiles are
+          fictional.
         </p>
       </div>
     </section>
