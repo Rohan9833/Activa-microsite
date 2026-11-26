@@ -74,7 +74,7 @@ export default function Navbar() {
 
         <div className="flex shrink-0 items-center gap-3 lg:hidden">
           <img
-            src="/assets/Activabydigilateral.png"
+            src="/assets/Productbydigilateral.png"
             alt="ActiVA by Digilateral"
             className="h-7 w-auto max-w-[92px] object-contain"
           />
