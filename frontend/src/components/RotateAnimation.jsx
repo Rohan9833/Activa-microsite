@@ -38,7 +38,6 @@ export default function RotateAnimation({ alt }) {
   const [visible, setVisible] = useState(true);
   const rootRef = useRef(null);
   const stepRef = useRef(0);
-  const swipeStartX = useRef(null);
   stepRef.current = step;
 
   // Only animate while on screen and the tab is visible
@@ -60,15 +59,6 @@ export default function RotateAnimation({ alt }) {
   const [turnMs, setTurnMs] = useState(TURN_MS);
   const angleRef = useRef(0);
 
-  const onSwipeStart = (e) => { swipeStartX.current = e.touches[0].clientX; };
-  const onSwipeEnd = (e) => {
-    if (swipeStartX.current == null) return;
-    const delta = e.changedTouches[0].clientX - swipeStartX.current;
-    swipeStartX.current = null;
-    if (Math.abs(delta) < 25) return;
-    goTo((stepRef.current + (delta < 0 ? 1 : -1) + STEPS.length) % STEPS.length);
-  };
-
   const goTo = (next) => {
     if (next === stepRef.current) return;
     // card positions are 0°, 90°, 180° — always turn clockwise to reach the next one
@@ -79,6 +69,11 @@ export default function RotateAnimation({ alt }) {
     setAngle(angleRef.current);
     setStep(next);
   };
+\n  useEffect(() => {
+    const onSwipe = (e) => goTo((stepRef.current + e.detail.direction + STEPS.length) % STEPS.length);
+    window.addEventListener('interaction-preview-swipe', onSwipe);
+    return () => window.removeEventListener('interaction-preview-swipe', onSwipe);
+  }, []);
 
   useEffect(() => {
     if (reduce || paused || !visible) return undefined;
@@ -92,8 +87,6 @@ export default function RotateAnimation({ alt }) {
       <div
         ref={rootRef}
         className="relative w-full select-none overflow-hidden touch-pan-y [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
-        onTouchStart={onSwipeStart}
-        onTouchEnd={onSwipeEnd}
         style={{ aspectRatio: `${L.W} / ${L.H}` }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
