@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452 366" aria-hidden="true">
+<defs><linearGradient id="chev" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8B2CF0"/><stop offset="1" stop-color="#D21BE6"/></linearGradient></defs>
+<ellipse cx="190" cy="309.5" rx="172" ry="10" fill="#2A1A7A" opacity=".06"/>
+<g fill="none" stroke="url(#chev)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M380 162l18 18-18 18"/><path d="M402 162l18 18-18 18"/></g></svg>

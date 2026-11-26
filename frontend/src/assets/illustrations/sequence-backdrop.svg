@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452 366" aria-hidden="true">
+<defs>
+<linearGradient id="chev" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8B2CF0"/><stop offset="1" stop-color="#D21BE6"/></linearGradient>
+<marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1E88E5"/></marker>
+</defs>
+<ellipse cx="190" cy="286.5" rx="170" ry="11" fill="#2A1A7A" opacity=".06"/>
+<path d="M66 99.5C86 49.5 166 41.5 198 83.5" fill="none" stroke="#1E88E5" stroke-width="7" stroke-linecap="round" marker-end="url(#ah)"/>
+<path d="M300 272.5C282 314.5 206 322.5 176 282.5" fill="none" stroke="#1E88E5" stroke-width="7" stroke-linecap="round" marker-end="url(#ah)"/>
+<g fill="none" stroke="url(#chev)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M380 162l18 18-18 18"/><path d="M402 162l18 18-18 18"/></g>
+</svg>

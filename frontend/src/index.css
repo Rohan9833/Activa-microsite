@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-navy antialiased;
+    overflow-x: hidden;
+  }
+  :focus-visible {
+    outline: 3px solid #7434F5;
+    outline-offset: 3px;
+    border-radius: 10px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-10;
+  }
+  .text-gradient {
+    background: linear-gradient(100deg, #0866F5 0%, #7434F5 52%, #DD10E8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full px-6 py-3 text-[15px] font-bold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-70;
+  }
+  .btn-primary {
+    @apply btn bg-brand-gradient text-white shadow-glow hover:-translate-y-0.5 hover:brightness-110;
+  }
+  .btn-secondary {
+    @apply btn border-2 border-brand-blue/70 bg-white text-navy hover:-translate-y-0.5 hover:border-brand-violet hover:text-brand-violet;
+  }
+  .accent-bar {
+    @apply block h-1 w-16 rounded-full bg-brand-gradient;
+  }
+  .eyebrow {
+    @apply text-xs font-extrabold uppercase tracking-[0.14em] text-brand-blue sm:text-sm;
+  }
+  .section-title {
+    @apply text-[1.85rem] font-extrabold leading-[1.1] tracking-tight text-navy sm:text-4xl lg:text-[2.75rem];
+  }
+  .card {
+    @apply rounded-3xl border border-white bg-white shadow-card;
+  }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* Animation tab: card and on-screen character move in sync (hold, move right, hold, move back) */
+@keyframes activa-slide {
+  0%, 12% { transform: translate(0, 0) scale(1); }
+  45%, 62% { transform: translate(var(--tx), var(--ty)) scale(var(--s)); }
+  95%, 100% { transform: translate(0, 0) scale(1); }
+}
+.activa-slide {
+  animation: activa-slide 7s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .activa-slide { animation: none; }
+}
