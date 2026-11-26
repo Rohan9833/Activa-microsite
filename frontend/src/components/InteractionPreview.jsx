@@ -28,19 +28,19 @@ export default function InteractionPreview({ item, index, total }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-          className="grid h-[191px] items-center gap-2 p-5 sm:p-7 md:h-full md:grid-cols-[0.5fr_1.5fr] md:gap-6 touch-pan-y select-none"
+          className="grid h-[181px] items-center gap-2 p-5 sm:p-7 md:h-full md:grid-cols-[0.5fr_1.5fr] md:gap-6 touch-pan-y select-none"
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
           <div className="flex h-full flex-col md:block md:h-auto md:pl-1">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-navy-300">
+            <p className="text-xs mt-2 font-bold uppercase tracking-[0.14em] text-navy-300">
               {String(index + 1).padStart(2, "0")} /{" "}
               {String(total).padStart(2, "0")}
             </p>
             <h3 className="mt-2 text-[1.75rem] font-extrabold leading-tight text-navy sm:text-3xl">
               {item.title}
             </h3>
-            <p className="my-auto mt-0 max-w-[17rem] text-base leading-relaxed text-navy-500 sm:text-[17px] md:mt-2 md:mb-0">
+            <p className="my-auto mt-[32px] max-w-[17rem] text-base leading-relaxed text-navy-500 sm:text-[17px] md:mt-2 md:mb-0">
               {item.description}
             </p>
           </div>
