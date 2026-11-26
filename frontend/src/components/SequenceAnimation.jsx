@@ -43,6 +43,7 @@ export default function SequenceAnimation({ alt }) {
   const [visible, setVisible] = useState(true);
   const rootRef = useRef(null);
   const stepRef = useRef(0);
+  const swipeStartX = useRef(null);
   const timers = useRef([]);
   stepRef.current = step;
 
@@ -61,6 +62,15 @@ export default function SequenceAnimation({ alt }) {
       document.removeEventListener('visibilitychange', onVis);
     };
   }, []);
+
+  const onSwipeStart = (e) => { swipeStartX.current = e.touches[0].clientX; };
+  const onSwipeEnd = (e) => {
+    if (swipeStartX.current == null) return;
+    const delta = e.changedTouches[0].clientX - swipeStartX.current;
+    swipeStartX.current = null;
+    if (Math.abs(delta) < 40) return;
+    goTo((stepRef.current + (delta < 0 ? 1 : -1) + STEPS.length) % STEPS.length);
+  };
 
   const goTo = (next) => {
     if (next === stepRef.current) return;
@@ -95,7 +105,9 @@ export default function SequenceAnimation({ alt }) {
     <div ref={rootRef}>
       <span className="sr-only">{alt}</span>
       <div
-        className="grid w-full select-none grid-cols-[226fr_262fr] items-stretch"
+        className="grid w-full select-none touch-pan-y grid-cols-[226fr_262fr] items-stretch"
+        onTouchStart={onSwipeStart}
+        onTouchEnd={onSwipeEnd}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
