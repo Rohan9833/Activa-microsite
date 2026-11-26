@@ -75,3 +75,703 @@
 @media (prefers-reduced-motion: reduce) {
   .activa-slide { animation: none; }
 }
+
+/*
+ * 375px mobile art direction.
+ * All overrides are capped at 639px: tablet and desktop layouts retain
+ * their existing Tailwind rules and remain visually unchanged.
+ */
+@media (max-width: 639px) {
+  html { scroll-padding-top: 66px; }
+  body { overflow-x: clip; }
+
+  .container-site {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Header: compact logo/menu row like the supplied mobile reference. */
+  header nav.container-site {
+    height: 58px;
+    gap: 10px;
+  }
+  header nav > a[aria-label="ActiVA home"] img {
+    width: 112px;
+  }
+  header nav > button[aria-controls="mobile-menu"] {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #E7E3F5;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(38, 28, 89, .10);
+  }
+
+  /* Hero: heading and copy first, paired CTAs, full-bleed clinic photo. */
+  #top {
+    padding-bottom: 34px;
+    background: linear-gradient(180deg, #fff 0%, #F8F9FF 72%, #fff 100%);
+  }
+  #top > .container-site {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-top: 10px;
+  }
+  #top .container-site > div:first-of-type {
+    display: none;
+  }
+  #top h1 {
+    max-width: 340px;
+    font-size: 28px;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+  }
+  #top h1 .text-gradient {
+    display: inline;
+    padding-bottom: 0;
+  }
+  #top .accent-bar {
+    display: none;
+  }
+  #top h1 + p {
+    max-width: 330px;
+    margin-top: 9px;
+    font-size: 14px;
+    line-height: 1.28;
+  }
+  #top h1 + p + div {
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+    margin-top: 10px;
+  }
+  #top h1 + p + div .btn {
+    min-height: 38px;
+    width: auto;
+    flex: 1 1 0;
+    gap: 5px;
+    padding: 8px 10px;
+    font-size: 11px;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  #top .container-site > div:last-child {
+    width: calc(100% + 32px);
+    margin: 0 -16px;
+    border-radius: 22px 22px 0 0;
+    overflow: hidden;
+  }
+  #top .container-site > div:last-child img {
+    display: block;
+    width: 100%;
+    height: 198px;
+    object-fit: cover;
+    object-position: center 45%;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  #top > svg {
+    height: 38px;
+  }
+
+  /* Compact three-step flow cards, with inline chevrons. */
+  #how-it-works {
+    padding-top: 18px;
+    padding-bottom: 20px;
+  }
+  #how-it-works .container-site > div:first-child {
+    max-width: none;
+  }
+  #how-title {
+    font-size: 22px;
+    line-height: 1.1;
+  }
+  #how-title + p {
+    margin-top: 5px;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  #how-it-works ol {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 14px;
+  }
+  #how-it-works ol > li > div {
+    min-height: 106px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 9px 6px;
+    border-radius: 15px;
+    text-align: center;
+  }
+  #how-it-works ol > li > div > span {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+  }
+  #how-it-works ol > li > div > span svg {
+    width: 17px;
+    height: 17px;
+  }
+  #how-it-works ol h3 {
+    font-size: 12px;
+    line-height: 1.1;
+  }
+  #how-it-works ol p {
+    margin-top: 0;
+    font-size: 9px;
+    line-height: 1.2;
+  }
+  #how-it-works ol > li:not(:last-child)::after {
+    content: "›";
+    position: absolute;
+    z-index: 2;
+    top: 43%;
+    right: -9px;
+    color: #8736F5;
+    font-size: 22px;
+    font-weight: 800;
+  }
+
+  /* Experiences: heading above horizontal chips and a compact side-by-side panel. */
+  #experiences {
+    padding-top: 4px;
+    padding-bottom: 22px;
+  }
+  #experiences .container-site {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  #experiences .container-site > div {
+    padding: 14px 11px 12px;
+    border-radius: 19px;
+  }
+  #experiences .container-site > div > div:first-child {
+    display: block;
+  }
+  #experiences .container-site > div > div:first-child > div:first-child {
+    padding: 0 2px;
+  }
+  #experiences .accent-bar {
+    display: none;
+  }
+  #experiences .section-title {
+    margin-top: 2px;
+    font-size: 19px;
+    line-height: 1.1;
+  }
+  #experiences .eyebrow {
+    font-size: 9px;
+    letter-spacing: .12em;
+  }
+  #experiences .section-title + p {
+    display: none;
+  }
+  #experiences [role="tablist"] {
+    margin: 9px -11px 0;
+    gap: 5px;
+    padding: 0 11px 4px;
+  }
+  #experiences [role="tab"] {
+    min-height: 29px;
+    gap: 4px;
+    padding: 5px 8px;
+    border-radius: 999px;
+    font-size: 9px;
+  }
+  #experiences [role="tab"] svg {
+    width: 12px;
+    height: 12px;
+  }
+  #experiences [role="tabpanel"] {
+    margin-top: 5px;
+  }
+  #experiences [role="tabpanel"] > div {
+    border-radius: 15px;
+  }
+  #experiences [role="tabpanel"] > div > div {
+    grid-template-columns: minmax(108px, .8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: 5px;
+    padding: 10px 9px;
+  }
+  #experiences [role="tabpanel"] h3 {
+    margin-top: 3px;
+    font-size: 18px;
+    line-height: 1.05;
+  }
+  #experiences [role="tabpanel"] p {
+    font-size: 10px;
+    line-height: 1.25;
+  }
+  #experiences [role="tabpanel"] p:first-child {
+    font-size: 8px;
+  }
+  #experiences [role="tabpanel"] [role="img"] {
+    min-width: 0;
+  }
+
+  /* Brand story: three small cards in one row, with arrows between them. */
+  #brand-title,
+  #brand-title + p {
+    max-width: 315px;
+  }
+  #brand-title {
+    font-size: 21px;
+    line-height: 1.03;
+  }
+  #brand-title + p {
+    margin-top: 6px;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  section[aria-labelledby="brand-title"] {
+    padding-top: 0;
+    padding-bottom: 22px;
+  }
+  section[aria-labelledby="brand-title"] > .container-site {
+    display: block;
+  }
+  section[aria-labelledby="brand-title"] ol {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+    margin-top: 10px;
+  }
+  section[aria-labelledby="brand-title"] ol > li > div {
+    min-height: 112px;
+    padding: 8px 5px;
+    border-radius: 14px;
+  }
+  section[aria-labelledby="brand-title"] ol > li > div > span:first-child {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+  }
+  section[aria-labelledby="brand-title"] ol > li > div > span:first-child svg {
+    width: 17px;
+    height: 17px;
+  }
+  section[aria-labelledby="brand-title"] ol > li > div > span:nth-child(2) {
+    margin-top: 4px;
+    font-size: 7px;
+  }
+  section[aria-labelledby="brand-title"] ol h3 {
+    margin-top: 2px;
+    font-size: 10px;
+    line-height: 1.1;
+  }
+  section[aria-labelledby="brand-title"] ol p {
+    margin-top: 3px;
+    font-size: 8px;
+    line-height: 1.2;
+  }
+  section[aria-labelledby="brand-title"] ol > li > svg {
+    display: none;
+  }
+  section[aria-labelledby="brand-title"] ol > li:not(:last-child)::after {
+    content: "›";
+    position: absolute;
+    z-index: 3;
+    top: 43%;
+    right: -8px;
+    color: #8736F5;
+    font-size: 22px;
+    font-weight: 800;
+  }
+
+  /* Worked example: one horizontal story card with dots and swipe-friendly layout. */
+  #example {
+    padding-top: 14px;
+    padding-bottom: 22px;
+  }
+  #example .container-site > div:first-child {
+    max-width: none;
+  }
+  #example .eyebrow {
+    font-size: 8px;
+  }
+  #example-title {
+    margin-top: 4px;
+    font-size: 19px;
+    line-height: 1.08;
+  }
+  #example-title + p {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+  #example ol {
+    display: flex;
+    gap: 0;
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(53, 35, 113, .08);
+  }
+  #example ol > li {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+  #example ol > li > div {
+    display: grid;
+    grid-template-columns: 42% minmax(0, 1fr);
+    align-items: center;
+    min-height: 112px;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+  #example ol > li > div > div:first-child {
+    height: 106px;
+    padding: 4px;
+  }
+  #example ol > li > div > div:last-child {
+    padding: 8px 9px 8px 3px;
+  }
+  #example ol > li > div > div:last-child p:first-child {
+    font-size: 7px;
+    line-height: 1.2;
+  }
+  #example ol h3 {
+    margin-top: 3px;
+    font-size: 13px;
+    line-height: 1.12;
+  }
+  #example ol p:not(:first-child) {
+    margin-top: 4px;
+    font-size: 9px;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  #example ol > li:not(:first-child) {
+    display: none;
+  }
+  #example ol > li:first-child::before,
+  #example ol > li:first-child::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(53, 35, 113, .14);
+  }
+  #example ol > li:first-child::before { left: -8px; }
+  #example ol > li:first-child::after { right: -8px; }
+  #example .container-site > p {
+    margin-top: 8px;
+    font-size: 8px;
+    line-height: 1.25;
+  }
+  #example .container-site > p svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Benefits: left aligned intro and a dense two/three-column tile group. */
+  #why-activa {
+    padding-top: 0;
+    padding-bottom: 22px;
+  }
+  #why-activa .container-site {
+    display: block;
+  }
+  #why-activa .accent-bar {
+    width: 30px;
+    height: 2px;
+    margin-bottom: 8px;
+  }
+  #why-title {
+    font-size: 21px;
+  }
+  #why-title + p {
+    max-width: 280px;
+    margin-top: 5px;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+  #why-activa ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 10px;
+  }
+  #why-activa ul > li:last-child {
+    grid-column: auto;
+  }
+  #why-activa ul > li > div {
+    min-height: 73px;
+    padding: 7px 4px;
+    border-radius: 12px;
+  }
+  #why-activa ul svg {
+    width: 18px;
+    height: 18px;
+  }
+  #why-activa ul h3 {
+    margin-top: 3px;
+    font-size: 9px;
+    line-height: 1.1;
+  }
+  #why-activa ul p {
+    display: none;
+  }
+
+  /* Five-stage delivery timeline, kept readable on narrow devices. */
+  #process {
+    padding-top: 10px;
+    padding-bottom: 22px;
+  }
+  #process .container-site > div:first-child {
+    max-width: none;
+  }
+  #process .eyebrow {
+    font-size: 8px;
+  }
+  #process-title {
+    margin-top: 3px;
+    font-size: 20px;
+  }
+  #process-title + p {
+    margin-top: 5px;
+    font-size: 10px;
+  }
+  #process ol {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+    margin-top: 12px;
+  }
+  #process ol > li > div {
+    padding: 0 1px;
+    background: transparent;
+  }
+  #process ol > li > div > span {
+    width: 29px;
+    height: 29px;
+    border-radius: 9px;
+  }
+  #process ol > li > div > span > svg {
+    width: 15px;
+    height: 15px;
+  }
+  #process ol > li > div > span > span {
+    top: -5px;
+    right: -5px;
+    width: 14px;
+    height: 14px;
+    font-size: 8px;
+  }
+  #process ol h3 {
+    margin-top: 7px;
+    font-size: 8px;
+    line-height: 1.1;
+  }
+  #process ol p {
+    display: none;
+  }
+  #process ol > li:not(:last-child)::after {
+    content: "›";
+    position: absolute;
+    top: 7px;
+    right: -5px;
+    color: #8736F5;
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  /* FAQ and form: dense white rows and a single-column request form. */
+  #faq {
+    padding-top: 12px;
+    padding-bottom: 18px;
+  }
+  #faq .container-site {
+    display: block;
+  }
+  #faq .eyebrow {
+    font-size: 8px;
+  }
+  #faq-title {
+    margin-top: 3px;
+    font-size: 20px;
+  }
+  #faq-title + p {
+    margin-top: 4px;
+    margin-bottom: 9px;
+    font-size: 10px;
+  }
+  #faq .space-y-3 {
+    display: grid;
+    gap: 5px;
+  }
+  #faq .space-y-3 > div {
+    border-radius: 11px;
+  }
+  #faq .space-y-3 button {
+    min-height: 34px;
+    padding: 7px 10px;
+    gap: 6px;
+    border-radius: 11px;
+    font-size: 10px;
+    line-height: 1.2;
+  }
+  #faq .space-y-3 button svg {
+    width: 14px;
+    height: 14px;
+  }
+  #faq .space-y-3 p {
+    padding: 0 10px 9px;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+
+  #request-demo {
+    padding-top: 8px;
+    padding-bottom: 24px;
+  }
+  #request-demo > .container-site {
+    display: block;
+  }
+  #request-demo > .container-site > div:first-child {
+    display: none;
+  }
+  #request-demo h2 {
+    font-size: 21px;
+    text-align: center;
+  }
+  #request-demo h2 + p {
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 1.3;
+    text-align: center;
+  }
+  #request-demo form,
+  #request-demo [role="status"] {
+    margin-top: 12px;
+  }
+  #request-demo form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px 8px;
+    padding: 12px;
+    border-radius: 17px;
+    background: linear-gradient(135deg, #F1F4FF, #F7F1FF 55%, #FDF0FD);
+    box-shadow: 0 3px 15px rgba(53, 35, 113, .06);
+  }
+  #request-demo form > div,
+  #request-demo form > button,
+  #request-demo form > p {
+    min-width: 0;
+  }
+  #request-demo form > div:nth-of-type(1) {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px 8px;
+  }
+  #request-demo form > div:nth-of-type(2),
+  #request-demo form > div:nth-of-type(3),
+  #request-demo form > div:nth-of-type(4) {
+    grid-column: 1 / -1;
+  }
+  #request-demo form label {
+    margin-bottom: 3px;
+    font-size: 8px;
+  }
+  #request-demo form input,
+  #request-demo form textarea {
+    min-height: 27px;
+    border-radius: 8px;
+    padding: 5px 8px;
+    font-size: 9px;
+    line-height: 1.2;
+  }
+  #request-demo form textarea {
+    min-height: 44px;
+    resize: vertical;
+  }
+  #request-demo form > div:last-of-type {
+    grid-column: 1 / -1;
+    padding-top: 0;
+  }
+  #request-demo form > div:last-of-type button {
+    min-height: 34px;
+    width: 100%;
+    padding: 7px 12px;
+    font-size: 10px;
+  }
+  #request-demo form > div:last-of-type p {
+    margin-top: 4px;
+    font-size: 8px;
+  }
+  #request-demo form [role="alert"] {
+    grid-column: 1 / -1;
+    padding: 8px;
+    font-size: 9px;
+  }
+  #request-demo [role="status"] {
+    padding: 15px;
+    border-radius: 16px;
+  }
+  #request-demo [role="status"] h3 {
+    font-size: 18px;
+  }
+  #request-demo [role="status"] p {
+    font-size: 11px;
+  }
+
+  /* Footer mirrors the compact brand/navigation arrangement. */
+  footer > .container-site {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-top: 14px;
+    padding-bottom: 12px;
+  }
+  footer > .container-site > div:first-child {
+    gap: 5px;
+  }
+  footer > .container-site > div:first-child img {
+    width: 112px;
+  }
+  footer > .container-site > div:first-child p {
+    font-size: 9px;
+    line-height: 1.25;
+  }
+  footer > .container-site > div:last-child {
+    gap: 6px;
+  }
+  footer > .container-site > div:last-child ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px 12px;
+    font-size: 9px;
+  }
+  footer > .container-site > div:last-child ul li {
+    max-width: none;
+  }
+  footer > .container-site > div:last-child > a {
+    min-height: 30px;
+    margin-top: 2px;
+    padding: 6px 12px;
+    font-size: 9px;
+  }
+  footer > div:nth-last-child(2) p {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 8px;
+  }
+  footer > div:last-child {
+    height: 3px;
+  }
+}
+
+/* Slightly loosen the small-screen gutters on phones wider than 375px. */
+@media (min-width: 400px) and (max-width: 639px) {
+  #top h1 { font-size: 31px; }
+  #top .container-site > div:last-child img { height: 218px; }
+}
