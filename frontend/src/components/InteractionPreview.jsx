@@ -32,7 +32,7 @@ export default function InteractionPreview({ item, index, total }) {
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          <div className="md:pl-1">
+          <div className="flex h-full flex-col md:block md:h-auto md:pl-1">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-navy-300">
               {String(index + 1).padStart(2, "0")} /{" "}
               {String(total).padStart(2, "0")}
@@ -40,7 +40,7 @@ export default function InteractionPreview({ item, index, total }) {
             <h3 className="mt-2 text-[1.75rem] font-extrabold leading-tight text-navy sm:text-3xl">
               {item.title}
             </h3>
-            <p className="mt-8 md:mt-2 max-w-[17rem] text-base leading-relaxed text-navy-500 sm:text-[17px]">
+            <p className="my-auto mt-0 max-w-[17rem] text-base leading-relaxed text-navy-500 sm:text-[17px] md:mt-2 md:mb-0">
               {item.description}
             </p>
           </div>
