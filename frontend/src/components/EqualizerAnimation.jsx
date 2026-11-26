@@ -35,7 +35,6 @@ export default function EqualizerAnimation({ alt }) {
   const [visible, setVisible] = useState(true);
   const rootRef = useRef(null);
   const stepRef = useRef(0);
-  const swipeStartX = useRef(null);
   const timer = useRef(null);
   stepRef.current = step;
 
@@ -54,21 +53,17 @@ export default function EqualizerAnimation({ alt }) {
     };
   }, []);
 
-  const onSwipeStart = (e) => { swipeStartX.current = e.touches[0].clientX; };
-  const onSwipeEnd = (e) => {
-    if (swipeStartX.current == null) return;
-    const delta = e.changedTouches[0].clientX - swipeStartX.current;
-    swipeStartX.current = null;
-    if (Math.abs(delta) < 25) return;
-    goTo((stepRef.current + (delta < 0 ? 1 : -1) + STEPS.length) % STEPS.length);
-  };
-
   const goTo = (next) => {
     if (next === stepRef.current) return;
     setPos(STEPS[next].pos);
     clearTimeout(timer.current);
     setStep(next);
   };
+\n  useEffect(() => {
+    const onSwipe = (e) => goTo((stepRef.current + e.detail.direction + STEPS.length) % STEPS.length);
+    window.addEventListener('interaction-preview-swipe', onSwipe);
+    return () => window.removeEventListener('interaction-preview-swipe', onSwipe);
+  }, []);
 
   useEffect(() => {
     if (reduce || paused || !visible) return undefined;
@@ -85,8 +80,6 @@ export default function EqualizerAnimation({ alt }) {
       <span className="sr-only">{alt}</span>
       <div
         className="grid w-full select-none touch-pan-y grid-cols-[226fr_262fr] items-stretch"
-        onTouchStart={onSwipeStart}
-        onTouchEnd={onSwipeEnd}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
