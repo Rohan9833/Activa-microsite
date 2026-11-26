@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, Info } from 'lucide-react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Reveal from './Reveal.jsx';
 import cardAcid from '../assets/images/sequence-anim/card-acid.webp';
 import cardMotility from '../assets/images/sequence-anim/card-motility.webp';
@@ -70,7 +70,36 @@ const STEPS = [
 
 export default function WorkedExample() {
   const [activeStep, setActiveStep] = useState(0);
+  const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
   const goToStep = (step) => setActiveStep((step + STEPS.length) % STEPS.length);
+
+  const handleTouchStart = (event) => {
+    const touch = event.touches[0];
+    touchStartX.current = touch.clientX;
+    touchStartY.current = touch.clientY;
+  };
+
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX.current;
+    const deltaY = touch.clientY - touchStartY.current;
+
+    // Only change slides for a deliberate horizontal swipe, not vertical scrolling.
+    if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      goToStep(activeStep + (deltaX < 0 ? 1 : -1));
+    }
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
+  const handleTouchCancel = () => {
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
 
   return (
     <section id="example" className="py-14 sm:py-20" aria-labelledby="example-title">
@@ -85,7 +114,7 @@ export default function WorkedExample() {
           </p>
         </Reveal>
 
-        <div className="example-carousel-viewport">
+        <div\n          className="example-carousel-viewport"\n          onTouchStart={handleTouchStart}\n          onTouchEnd={handleTouchEnd}\n          onTouchCancel={handleTouchCancel}\n        >
           <ol className="example-slides mt-10 grid gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-10" style={{ "--active-slide": activeStep }}>
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.tag} delay={i * 0.08} className="relative">
