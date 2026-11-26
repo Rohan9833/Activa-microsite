@@ -884,3 +884,34 @@
     padding-right: 22px;
   }
 }
+
+/* Mobile hero: prevent text from touching/overflowing the viewport and
+   leave a visible trailing gutter after the CTA buttons. */
+@media (max-width: 639px) {
+  #top h1 {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(25px, 7.4vw, 31px);
+    overflow-wrap: break-word;
+  }
+  #top h1 .text-gradient {
+    white-space: normal;
+  }
+  #top h1 + p {
+    width: 100%;
+    max-width: calc(100% - 10px);
+    overflow-wrap: break-word;
+  }
+  #top h1 + p + div {
+    padding-right: 10px;
+    box-sizing: border-box;
+  }
+  #top h1 + p + div .btn {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: calc(50% - 5px);
+    padding-left: 7px;
+    padding-right: 7px;
+    white-space: normal;
+  }
+}
