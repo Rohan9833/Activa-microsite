@@ -24,14 +24,7 @@ export default function InteractionExperiences() {
     const next = (i + INTERACTIONS.length) % INTERACTIONS.length;
     setActive(next);
     const el = tabRefs.current[next];
-    if (el) {
-      if (focus) el.focus({ preventScroll: true });
-      // Scroll only the tab strip (scrollIntoView would also shift clipped ancestors).
-      const list = listRef.current;
-      if (list && list.scrollWidth > list.clientWidth) {
-        list.scrollTo({ left: el.offsetLeft - (list.clientWidth - el.offsetWidth) / 2, behavior: 'smooth' });
-      }
-    }
+    if (el && focus) el.focus({ preventScroll: true });
   };
 
   const onKeyDown = (e) => {
@@ -66,7 +59,7 @@ export default function InteractionExperiences() {
                 role="tablist"
                 aria-label="Interaction types"
                 onKeyDown={onKeyDown}
-                className="no-scrollbar relative -mx-5 flex snap-x gap-2.5 overflow-x-auto px-5 pb-1 sm:-mx-8 sm:px-8 xl:mx-0 xl:flex-wrap xl:justify-end xl:gap-2 xl:overflow-visible xl:px-0"
+                className="relative flex flex-wrap justify-center gap-2 px-0 pb-1 sm:gap-2.5 xl:justify-end"
               >
                 {INTERACTIONS.map((it, i) => {
                   const Icon = it.icon;
@@ -82,13 +75,13 @@ export default function InteractionExperiences() {
                       aria-controls={`panel-${it.id}`}
                       tabIndex={selected ? 0 : -1}
                       onClick={() => select(i)}
-                      className={`inline-flex min-h-[46px] shrink-0 snap-start items-center gap-2 rounded-2xl px-4 text-sm font-bold lg:px-3.5 lg:text-[13px] xl:px-4 xl:text-sm transition-all duration-200 sm:px-5 ${
+                      className={`inline-flex min-h-[42px] shrink items-center gap-1.5 whitespace-nowrap rounded-2xl px-2.5 text-[11px] font-bold transition-all duration-200 sm:min-h-[46px] sm:gap-2 sm:px-4 sm:text-sm lg:px-3.5 lg:text-[13px] xl:px-4 xl:text-sm ${
                         selected
                           ? 'bg-brand-gradient text-white shadow-glow'
                           : 'bg-white text-navy ring-1 ring-[#DCDFF5] hover:-translate-y-0.5 hover:text-brand-violet hover:ring-brand-violet/50'
                       }`}
                     >
-                      <Icon size={18} aria-hidden="true" className={selected ? 'text-white' : 'text-brand-violet'} />
+                      <Icon size={16} aria-hidden="true" className={selected ? 'shrink-0 text-white' : 'shrink-0 text-brand-violet'} />
                       {it.label}
                     </button>
                   );
