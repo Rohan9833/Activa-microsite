@@ -65,7 +65,7 @@ export default function RotateAnimation({ alt }) {
     if (swipeStartX.current == null) return;
     const delta = e.changedTouches[0].clientX - swipeStartX.current;
     swipeStartX.current = null;
-    if (Math.abs(delta) < 40) return;
+    if (Math.abs(delta) < 25) return;
     goTo((stepRef.current + (delta < 0 ? 1 : -1) + STEPS.length) % STEPS.length);
   };
 
@@ -77,7 +77,7 @@ export default function RotateAnimation({ alt }) {
     angleRef.current += delta;
     setTurnMs(reduce ? 0 : delta > 90 ? TURN_MS * 1.4 : TURN_MS);
     setAngle(angleRef.current);
-    window.setTimeout(() => setStep(next), reduce ? 0 : (delta > 90 ? TURN_MS * 1.4 : TURN_MS) * 0.85);
+    setStep(next);
   };
 
   useEffect(() => {
