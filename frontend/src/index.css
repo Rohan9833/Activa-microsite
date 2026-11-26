@@ -76,7 +76,7 @@
   .activa-slide { animation: none; }
 }
 
-.example-carousel-controls { display: none; }
+.example-carousel-controls { display: none; }\n.example-slide-clone { display: none; }
 
 /*
  * 375px mobile art direction.
@@ -456,17 +456,23 @@
     overflow: hidden;
   }
   #example ol.example-slides {
-    width: 300%;
+    width: 500%;
     max-width: none;
-    transform: translateX(calc(var(--active-slide) * -33.333333%));
+    transform: translateX(calc(var(--active-slide) * -20%));
     transition: transform 320ms cubic-bezier(.22,.61,.36,1);
     overflow: visible;
     box-shadow: none;
   }
+  #example ol.example-slides.example-no-transition {
+    transition: none !important;
+  }
   #example ol > li {
     display: block !important;
-    flex: 0 0 33.333333%;
-    width: 33.333333%;
+    flex: 0 0 20%;
+    width: 20%;
+  }
+  #example .example-slide-clone {
+    display: block !important;
   }
   #example ol > li > div {
     box-shadow: 0 5px 18px rgba(53, 35, 113, .08);
