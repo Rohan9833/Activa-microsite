@@ -76,6 +76,8 @@
   .activa-slide { animation: none; }
 }
 
+.example-carousel-controls { display: none; }
+
 /*
  * 375px mobile art direction.
  * All overrides are capped at 639px: tablet and desktop layouts retain
