@@ -15,7 +15,7 @@ export default function HowWeWork() {
       <div className="container-site">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="eyebrow text-start lg:text-center">How we work</p>
-          <h2 id="process-title" className="section-title mt-2 text-start lg:text-center">From brief to clinic</h2>
+          <h2 id="process-title" className="section-title mt-2 text-start lg:text-center">From Brief to Clinic</h2>
           <p className="text-start mt-2 text-lg text-navy-500 lg:text-center lg:mt-4">A clear, collaborative path from your brand objective to the field.</p>
         </Reveal>
 

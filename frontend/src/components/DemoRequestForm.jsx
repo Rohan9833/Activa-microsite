@@ -238,7 +238,7 @@ export default function DemoRequestForm() {
                       </>
                     ) : (
                       <>
-                        Request a Demo <ChevronRight size={18} aria-hidden="true" />
+                        Request a Demo 
                       </>
                     )}
                   </button>
