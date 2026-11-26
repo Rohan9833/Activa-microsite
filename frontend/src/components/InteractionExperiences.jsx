@@ -8,6 +8,7 @@ export default function InteractionExperiences() {
   const [active, setActive] = useState(0);
   const tabRefs = useRef([]);
   const listRef = useRef(null);
+  const touchStartX = useRef(null);
 
   // Warm the cache for the other illustrations so tab switches are instant.
   useEffect(() => {
@@ -25,6 +26,15 @@ export default function InteractionExperiences() {
     setActive(next);
     const el = tabRefs.current[next];
     if (el && focus) el.focus({ preventScroll: true });
+  };
+
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchStartX.current == null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 45) return;
+    select(active + (delta < 0 ? 1 : -1));
   };
 
   const onKeyDown = (e) => {
