@@ -14,13 +14,15 @@ export const env = {
   rateLimitMax: toInt(process.env.RATE_LIMIT_MAX, 10),
   trustProxy: toInt(process.env.TRUST_PROXY, 0),
   serveFrontend: toBool(process.env.SERVE_FRONTEND),
-  smtpHost: process.env.SMTP_HOST || '',
-  smtpPort: toInt(process.env.SMTP_PORT, 587),
-  smtpSecure: toBool(process.env.SMTP_SECURE),
-  smtpUser: process.env.SMTP_USER || '',
-  smtpPass: process.env.SMTP_PASS || '',
-  mailFrom: process.env.MAIL_FROM || process.env.SMTP_USER || '',
-  demoRecipient: process.env.DEMO_RECIPIENT_EMAIL || '',
+
+  // Accept the user's EMAIL_* variables, with SMTP_* aliases for compatibility.
+  smtpHost: process.env.EMAIL_HOST || process.env.SMTP_HOST || '',
+  smtpPort: toInt(process.env.EMAIL_PORT || process.env.SMTP_PORT, 587),
+  smtpSecure: toBool(process.env.EMAIL_SECURE ?? process.env.SMTP_SECURE),
+  smtpUser: process.env.EMAIL_USER || process.env.SMTP_USER || '',
+  smtpPass: process.env.EMAIL_PASS || process.env.SMTP_PASS || '',
+  mailFrom: process.env.EMAIL_FROM || process.env.MAIL_FROM || process.env.EMAIL_USER || process.env.SMTP_USER || '',
+  demoRecipient: process.env.EMAIL_TO || process.env.DEMO_RECIPIENT_EMAIL || '',
 };
 
 export const isProd = env.nodeEnv === 'production';
