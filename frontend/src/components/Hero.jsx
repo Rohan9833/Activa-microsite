@@ -120,7 +120,7 @@ export default function Hero() {
             </a>
           </div>
         </motion.div> */}
-        <h1 className="!text-[0.95rem] mb-1 font-[500] leading-[1.06] tracking-tight text-navy min-[400px]:text-[2.6rem] sm:text-5xl lg:text-[2.7rem] xl:text-[3.3rem]">
+        <h1 className="!text-[0.95rem] mb-1 font-[500] leading-[1.06] tracking-tight text-navy min-[400px]:text-[2.6rem] sm:text-5xl lg:hidden lg:text-[2.7rem] xl:text-[3.3rem]">
           <span className="text-gradient block pb-1  lg:whitespace-nowrap">
             Where Physical Interaction Meets Digitial Detailing
           </span>
@@ -141,7 +141,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 max-w-xl lg:max-w-none pl-[6px] pb-[6px] pt-[rpx]"
+          className="relative z-10 max-w-xl lg:max-w-none lg:pl-0 lg:pb-0 lg:pt-0"
         >
           <span className="accent-bar mb-6" aria-hidden="true" />
 
