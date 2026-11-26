@@ -53,7 +53,7 @@
     @apply text-xs font-extrabold uppercase tracking-[0.14em] text-brand-blue sm:text-sm;
   }
   .section-title {
-    @apply text-[1.85rem] font-extrabold leading-[1.1] tracking-tight text-navy sm:text-4xl lg:text-[2.75rem];
+    @apply text-[1.85rem] font-[900] leading-[1.1] tracking-tight text-navy sm:text-4xl lg:text-[2.75rem];
   }
   .card {
     @apply rounded-3xl border border-white bg-white shadow-card;
@@ -320,7 +320,7 @@
     max-width: 315px;
   }
   #brand-title {
-    font-size: 21px;
+    font-size: 19px;
     line-height: 1.03;
   }
   #brand-title + p {

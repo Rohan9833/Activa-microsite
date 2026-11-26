@@ -9,7 +9,7 @@ export default function BrandStory() {
         <Reveal>
           <h2 id="brand-title" className="section-title xl:text-[2.4rem]">
             Your Brand Story.
-            <span className="text-gradient block pb-1">Your Interaction.</span>
+            <span className="text-gradient pb-1">Your Interaction.</span>
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-navy-500">
             Custom interactions designed around your brand&rsquo;s communication objective.
