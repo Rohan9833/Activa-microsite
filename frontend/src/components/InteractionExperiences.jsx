@@ -28,14 +28,6 @@ export default function InteractionExperiences() {
     if (el && focus) el.focus({ preventScroll: true });
   };
 
-  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
-  const onTouchEnd = (e) => {
-    if (touchStartX.current == null) return;
-    const delta = e.changedTouches[0].clientX - touchStartX.current;
-    touchStartX.current = null;
-    if (Math.abs(delta) < 45) return;
-    select(active + (delta < 0 ? 1 : -1));
-  };
 
   const onKeyDown = (e) => {
     const map = { ArrowRight: active + 1, ArrowDown: active + 1, ArrowLeft: active - 1, ArrowUp: active - 1, Home: 0, End: INTERACTIONS.length - 1 };
