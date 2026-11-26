@@ -330,16 +330,15 @@ export default function WorkedExample() {
         </div>
 
         {/* Disclaimer */}
-        <p className="mx-auto mt-6 flex max-w-3xl justify-center items-start justify-center gap-2 text-center text-sm text-navy-300">
+        <p className="mx-auto mt-6 flex max-w-3xl items-center justify-center gap-2 text-center text-sm text-navy-300">
           <Info
             size={16}
-            className="mt-0.5 shrink-0"
-            aria-hidden="true "
+            className="shrink-0"
+            aria-hidden="true"
           />
-
-          Illustrative concept. It is
-          not a client case study, patient profiles are
-          fictional.
+          <span className="min-w-0 leading-normal">
+            Illustrative concept. It is not a client case study, patient profiles are fictional.
+          </span>
         </p>
       </div>
     </section>
