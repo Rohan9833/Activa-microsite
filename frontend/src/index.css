@@ -860,3 +860,27 @@
     width: auto;
   }
 }
+
+/* Desktop hero typography containment and CTA spacing */
+@media (min-width: 1024px) {
+  #top > .container-site > div:last-child h1 {
+    font-size: clamp(2.45rem, 2.8vw, 3.25rem);
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+  #top > .container-site > div:last-child h1 .text-gradient {
+    white-space: normal !important;
+  }
+  #top > .container-site > div:last-child p {
+    max-width: 31rem;
+    overflow-wrap: anywhere;
+  }
+  #top > .container-site > div:last-child > div {
+    gap: 12px;
+  }
+  #top > .container-site > div:last-child > div a {
+    flex: 0 0 auto;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
