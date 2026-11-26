@@ -80,7 +80,7 @@ export default function SequenceAnimation({ alt }) {
     later(() => setLift({}), MOVE_MS * 0.5);
     setStep(next);
   };
-\n  useEffect(() => {
+  useEffect(() => {
     const onSwipe = (e) => goTo((stepRef.current + e.detail.direction + STEPS.length) % STEPS.length);
     window.addEventListener('interaction-preview-swipe', onSwipe);
     return () => window.removeEventListener('interaction-preview-swipe', onSwipe);

@@ -59,7 +59,7 @@ export default function EqualizerAnimation({ alt }) {
     clearTimeout(timer.current);
     setStep(next);
   };
-\n  useEffect(() => {
+  useEffect(() => {
     const onSwipe = (e) => goTo((stepRef.current + e.detail.direction + STEPS.length) % STEPS.length);
     window.addEventListener('interaction-preview-swipe', onSwipe);
     return () => window.removeEventListener('interaction-preview-swipe', onSwipe);
