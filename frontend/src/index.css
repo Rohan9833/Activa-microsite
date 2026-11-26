@@ -119,8 +119,8 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
-    padding-top: 10px;
+    gap: 5px;
+    /* padding-top: 10px; */
   }
   #top .container-site > div:first-of-type {
     display: block;
@@ -139,9 +139,9 @@
     display: none;
   }
   #top h1 + p {
-    max-width: 330px;
+    max-width: 355px;
     margin-top: 9px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.28;
   }
   #top h1 + p + div {
@@ -156,7 +156,7 @@
     flex: 1 1 0;
     gap: 5px;
     padding: 8px 10px;
-    font-size: 11px;
+    font-size: 12.5px;
     line-height: 1.1;
     white-space: nowrap;
   }
@@ -368,7 +368,7 @@
   }
   section[aria-labelledby="brand-title"] ol p {
     margin-top: 3px;
-    font-size: 8px;
+    font-size: 9px;
     line-height: 1.2;
   }
   section[aria-labelledby="brand-title"] ol > li > svg {
@@ -586,10 +586,10 @@
   }
   #process-title {
     margin-top: 3px;
-    font-size: 20px;
+    font-size: 22px;
   }
   #process-title + p {
-    margin-top: 5px;
+    margin-top: 2px;
     font-size: 10px;
   }
   #process ol {
@@ -602,8 +602,8 @@
     background: transparent;
   }
   #process ol > li > div > span {
-    width: 29px;
-    height: 29px;
+    width: 35px;
+    height: 35px;
     border-radius: 9px;
   }
   #process ol > li > div > span > svg {
@@ -619,7 +619,7 @@
   }
   #process ol h3 {
     margin-top: 7px;
-    font-size: 8px;
+    font-size: 9px;
     line-height: 1.1;
   }
   #process ol p {
@@ -648,12 +648,12 @@
   }
   #faq-title {
     margin-top: 3px;
-    font-size: 20px;
+    font-size: 22px;
   }
   #faq-title + p {
     margin-top: 4px;
     margin-bottom: 9px;
-    font-size: 10px;
+    font-size: 12px;
   }
   #faq .space-y-3 {
     display: grid;
@@ -667,7 +667,7 @@
     padding: 7px 10px;
     gap: 6px;
     border-radius: 11px;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.2;
   }
   #faq .space-y-3 button svg {
@@ -676,7 +676,7 @@
   }
   #faq .space-y-3 p {
     padding: 0 10px 9px;
-    font-size: 9px;
+    font-size: 11px;
     line-height: 1.3;
   }
 

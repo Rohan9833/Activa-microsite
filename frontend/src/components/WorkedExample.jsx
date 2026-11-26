@@ -189,14 +189,14 @@ export default function WorkedExample() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="eyebrow">Example concept</p>
 
-          <h2 id="example-title" className="section-title mt-2">
+          <h2 id="example-title" className="text-start section-title mt-2">
             One brand story.{" "}
             <span className="text-gradient">
               Many patient conversations.
             </span>
           </h2>
 
-          <p className="mt-4 text-lg text-navy-500">
+          <p className="text-start mt-4 text-lg text-navy-500">
             How a single ActiVA interaction can turn GERD symptom
             profiling into a participative discussion.
           </p>

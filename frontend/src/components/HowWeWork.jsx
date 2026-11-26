@@ -14,9 +14,9 @@ export default function HowWeWork() {
     <section id="process" className="py-14 sm:py-20" aria-labelledby="process-title">
       <div className="container-site">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow">How we work</p>
-          <h2 id="process-title" className="section-title mt-2">From brief to clinic</h2>
-          <p className="mt-4 text-lg text-navy-500">A clear, collaborative path from your brand objective to the field.</p>
+          <p className="eyebrow text-start">How we work</p>
+          <h2 id="process-title" className="section-title mt-2 text-start">From brief to clinic</h2>
+          <p className="text-start mt-2 text-lg text-navy-500">A clear, collaborative path from your brand objective to the field.</p>
         </Reveal>
 
         <ol className="relative mt-10 grid gap-4 sm:grid-cols-2 lg:mt-14 lg:grid-cols-5 lg:gap-5">

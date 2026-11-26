@@ -6,7 +6,7 @@ import Reveal from './Reveal.jsx';
 const FAQS = [
   {
     q: 'What equipment does ActiVA need in the clinic?',
-    a: 'The MR’s iPad for detailing, an iPhone or Android smartphone used as the scanner/controller, and the printed interaction materials. The phone and iPad connect over the same Wi-Fi network with an authenticated login.',
+    a: 'The MR’s iPad for detailing, an iPhone or Android smartphone and the interaction materials.',
   },
   {
     q: 'Does ActiVA replace our existing iPad detailing?',
@@ -18,7 +18,7 @@ const FAQS = [
   },
   {
     q: 'What does the doctor actually interact with?',
-    a: 'Printed physical materials such as cards. Turning, arranging, sliding, choosing or moving them triggers the matching content on the iPad.',
+    a: 'Printed physical materials such as cards, literatures. Turning, arranging, sliding, choosing or moving them triggers the matching content on the iPad.',
   },
   {
     q: 'Can we use our existing detailing content?',
@@ -61,7 +61,7 @@ function Item({ item, open, onToggle, id }) {
         className={`grid transition-all duration-300 ${open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
       >
         <div className="overflow-hidden">
-          <p className="px-5 pb-5 text-[15px] leading-relaxed text-navy-500 sm:px-6">{item.a}</p>
+          <p className="px-5 pb-5 text-[17px] leading-relaxed text-navy-500 sm:px-6">{item.a}</p>
         </div>
       </div>
     </div>

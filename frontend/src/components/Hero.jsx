@@ -1,16 +1,20 @@
-import { motion } from 'framer-motion';
-import { ArrowRight, ChevronRight } from 'lucide-react';
-import hero1x from '../assets/images/hero-clinic.webp';
-import hero2x from '../assets/images/hero-clinic@2x.webp';
-import heroJpg from '../assets/images/hero-clinic@2x.jpg';
+import { motion } from "framer-motion";
+import { ArrowRight, ChevronRight } from "lucide-react";
+import hero1x from "../assets/images/hero-clinic.webp";
+import hero2x from "../assets/images/hero-clinic@2x.webp";
+import heroJpg from "../assets/images/hero-clinic@2x.jpg";
 
 const HERO_ALT =
-  'A pharmaceutical medical representative details an Esomeprazole brand presentation on an iPad to a doctor in his clinic, with ActiVA symptom cards (acid, motility and persistence) on the desk.';
+  "A pharmaceutical medical representative details an Esomeprazole brand presentation on an iPad to a doctor in his clinic, with ActiVA symptom cards (acid, motility and persistence) on the desk.";
 
 function HeroPicture({ className, imgClassName, sizes }) {
   return (
     <picture className={className}>
-      <source type="image/webp" srcSet={`${hero1x} 1138w, ${hero2x} 2276w`} sizes={sizes} />
+      <source
+        type="image/webp"
+        srcSet={`${hero1x} 1138w, ${hero2x} 2276w`}
+        sizes={sizes}
+      />
       <img
         src={heroJpg}
         alt={HERO_ALT}
@@ -44,17 +48,32 @@ function HeroWave() {
           <stop offset="1" stopColor="#F37CF5" stopOpacity="0.25" />
         </linearGradient>
       </defs>
-      <path d="M0 110C240 40 420 170 720 120S1200 30 1440 90V200H0Z" fill="url(#heroWaveB)" />
-      <path d="M0 150C260 80 520 190 820 150S1260 90 1440 130V200H0Z" fill="url(#heroWaveA)" />
-      <path d="M0 176C300 130 560 200 860 176S1280 140 1440 164V200H0Z" fill="#FFFFFF" />
+      <path
+        d="M0 110C240 40 420 170 720 120S1200 30 1440 90V200H0Z"
+        fill="url(#heroWaveB)"
+      />
+      <path
+        d="M0 150C260 80 520 190 820 150S1260 90 1440 130V200H0Z"
+        fill="url(#heroWaveA)"
+      />
+      <path
+        d="M0 176C300 130 560 200 860 176S1280 140 1440 164V200H0Z"
+        fill="#FFFFFF"
+      />
     </svg>
   );
 }
 
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-white via-[#F8F9FF] to-white pb-16 sm:pb-24 lg:pb-28">
-      <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(116,52,245,0.12),transparent_65%)]" aria-hidden="true" />
+    <section
+      id="top"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-[#F8F9FF] to-white pb-16 sm:pb-24 lg:pb-28"
+    >
+      <div
+        className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(116,52,245,0.12),transparent_65%)]"
+        aria-hidden="true"
+      />
       {/* Desktop: image bleeds to the right edge and fades into the page */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -69,17 +88,25 @@ export default function Hero() {
         />
       </motion.div>
 
-      <div className="container-site relative grid items-center gap-8 pt-10 sm:pt-14 lg:min-h-[540px] lg:grid-cols-2 lg:gap-6 lg:pt-6 xl:min-h-[590px]">
-        <motion.div
+      <div className="container-site relative grid items-center gap-8 pt-0 sm:pt-14 lg:min-h-[540px] lg:grid-cols-2 lg:gap-6 lg:pt-6 xl:min-h-[590px]">
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10 max-w-xl lg:max-w-none"
         >
           <span className="accent-bar mb-6" aria-hidden="true" />
-          <h1 className="text-[2.35rem] font-extrabold leading-[1.06] tracking-tight text-navy min-[400px]:text-[2.6rem] sm:text-5xl lg:text-[2.7rem] xl:text-[3.3rem]">
-            Don&rsquo;t Just Show.
-            <span className="text-gradient block pb-1 lg:whitespace-nowrap">Let the Doctor Interact.</span>
+
+
+
+          
+          <h1 className="!text-[0.9rem] font-[700] leading-[1.06] tracking-tight text-navy min-[400px]:text-[2.6rem] sm:text-5xl lg:text-[2.7rem] xl:text-[3.3rem]">
+            
+            <span className="text-gradient block pb-1  lg:whitespace-nowrap">Where Physical Interaction Meets Digitial Detailing</span>
+          </h1>
+           <h1 className="text-[2.35rem] font-extrabold leading-[1.06] tracking-tight text-navy min-[400px]:text-[2.6rem] sm:text-5xl lg:text-[2.7rem] xl:text-[3.3rem]">
+            Don&rsquo;t Just Detail.<br/>
+            <span className="text-gradient block pb-1  lg:whitespace-nowrap">Let the Doctor Interact.</span>
           </h1>
           <p className="mt-5 max-w-[30rem] text-lg leading-relaxed text-navy-500 sm:text-xl">
             Transform conventional iPad detailing into participative physical-to-digital brand experiences.
@@ -92,8 +119,12 @@ export default function Hero() {
               Explore Experiences <ArrowRight size={18} aria-hidden="true" />
             </a>
           </div>
-        </motion.div>
-
+        </motion.div> */}
+        <h1 className="!text-[0.95rem] mb-1 font-[500] leading-[1.06] tracking-tight text-navy min-[400px]:text-[2.6rem] sm:text-5xl lg:text-[2.7rem] xl:text-[3.3rem]">
+          <span className="text-gradient block pb-1  lg:whitespace-nowrap">
+            Where Physical Interaction Meets Digitial Detailing
+          </span>
+        </h1>
         {/* Mobile / tablet: image below the copy */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -105,6 +136,40 @@ export default function Hero() {
             sizes="100vw"
             imgClassName="h-auto w-full [mask-image:linear-gradient(to_bottom,black_75%,transparent)]"
           />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 max-w-xl lg:max-w-none pl-[6px] pb-[6px] pt-[rpx]"
+        >
+          <span className="accent-bar mb-6" aria-hidden="true" />
+
+          <h1 className="text-[2.35rem] font-extrabold leading-[1.06] tracking-tight text-navy min-[400px]:text-[2.6rem] sm:text-5xl lg:text-[2.7rem] xl:text-[3.3rem]">
+            Don&rsquo;t Just Detail.
+            <br />
+            <span className="text-gradient block pb-1  lg:whitespace-nowrap">
+              Let the Doctor Interact.
+            </span>
+          </h1>
+          <p className="mt-5 max-w-[40rem] text-lg leading-relaxed text-navy-500 sm:text-xl">
+            Transform conventional iPad detailing into participative
+            physical-to-digital brand experiences.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 min-[480px]:flex-row">
+            <a
+              href="#request-demo"
+              className="btn-primary w-full min-[480px]:w-auto"
+            >
+              Request a Demo 
+            </a>
+            <a
+              href="#experiences"
+              className="btn-secondary w-5 min-[480px]:w-auto"
+            >
+              Explore Experiences
+            </a>
+          </div>
         </motion.div>
       </div>
       <HeroWave />

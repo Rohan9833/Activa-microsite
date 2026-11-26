@@ -28,11 +28,11 @@ export default function InteractionPreview({ item, index, total }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-          className="grid h-full items-center gap-2 p-5 sm:p-7 md:grid-cols-[0.5fr_1.5fr] md:gap-6 touch-pan-y select-none"
+          className="grid h-[191px] items-center gap-2 p-5 sm:p-7 md:grid-cols-[0.5fr_1.5fr] md:gap-6 touch-pan-y select-none"
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
-          <div className="md:pl-1">
+          <div className="md:pl-1 md:self-start">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-navy-300">
               {String(index + 1).padStart(2, "0")} /{" "}
               {String(total).padStart(2, "0")}
@@ -40,7 +40,7 @@ export default function InteractionPreview({ item, index, total }) {
             <h3 className="mt-2 text-[1.75rem] font-extrabold leading-tight text-navy sm:text-3xl">
               {item.title}
             </h3>
-            <p className="mt-2 max-w-[17rem] text-base leading-relaxed text-navy-500 sm:text-[17px]">
+            <p className="mt-8 max-w-[17rem] text-base leading-relaxed text-navy-500 sm:text-[17px]">
               {item.description}
             </p>
           </div>

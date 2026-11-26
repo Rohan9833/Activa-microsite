@@ -73,11 +73,11 @@ export default function Navbar() {
         </div>
 
         <div className="flex shrink-0 items-center gap-3 lg:hidden">
-          <img
+          {/* <img
             src="/assets/Productbydigilateral.png"
             alt="ActiVA by Digilateral"
             className="h-7 w-auto max-w-[92px] object-contain"
-          />
+          /> */}
           <button
           type="button"
           className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-navy hover:bg-navy/5 lg:hidden"

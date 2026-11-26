@@ -22,7 +22,7 @@ export default function HowItWorks() {
                   </span>
                   <div>
                     <h3 className={`text-2xl font-extrabold ${step.titleColor}`}>{step.title}</h3>
-                    <p className="mt-1 text-[15px] leading-snug text-navy-500">{step.text}</p>
+                    <p className="mt-1 pt-1 text-[15px] leading-snug text-navy-500">{step.text}</p>
                   </div>
                 </div>
                 {i < FLOW_STEPS.length - 1 && (
