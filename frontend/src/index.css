@@ -409,6 +409,7 @@
     width: 100%;
     overflow: hidden;
     border-radius: 16px;
+    touch-action: pan-y;
   }
   #example ol {
     display: flex;
