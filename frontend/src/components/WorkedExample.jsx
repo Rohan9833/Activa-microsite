@@ -74,12 +74,18 @@ export default function WorkedExample() {
   const [transitionEnabled, setTransitionEnabled] = useState(true);
   const touchStartX = useRef(null);
   const touchStartY = useRef(null);
-  const touchMoved = useRef(false);
-
   const goToStep = (step) => {
     const next = (step + STEPS.length) % STEPS.length;
     setActiveStep(next);
-    setTrackPosition(next + 1);
+
+    // Use the boundary clones for a smooth wrap instead of jumping across the track.
+    if (activeStep === STEPS.length - 1 && next === 0) {
+      setTrackPosition(STEPS.length + 1);
+    } else if (activeStep === 0 && next === STEPS.length - 1) {
+      setTrackPosition(0);
+    } else {
+      setTrackPosition(next + 1);
+    }
   };
 
   const handleTouchStart = (event) => {
@@ -97,7 +103,6 @@ export default function WorkedExample() {
 
     // Only change slides for a deliberate horizontal swipe, not vertical scrolling.
     if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
-      touchMoved.current = true;
       goToStep(activeStep + (deltaX < 0 ? 1 : -1));
     }
 
