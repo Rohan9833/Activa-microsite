@@ -68,7 +68,7 @@ export default function SequenceAnimation({ alt }) {
     if (swipeStartX.current == null) return;
     const delta = e.changedTouches[0].clientX - swipeStartX.current;
     swipeStartX.current = null;
-    if (Math.abs(delta) < 40) return;
+    if (Math.abs(delta) < 25) return;
     goTo((stepRef.current + (delta < 0 ? 1 : -1) + STEPS.length) % STEPS.length);
   };
 
@@ -88,7 +88,7 @@ export default function SequenceAnimation({ alt }) {
     setLift(arcs);
     setOrder(to);
     later(() => setLift({}), MOVE_MS * 0.5);
-    later(() => setStep(next), MOVE_MS);
+    setStep(next);
   };
 
   useEffect(() => {
