@@ -233,6 +233,7 @@ export default function WorkedExample() {
                   as="li"
                   key={`${trackIndex}-${s.tag}`}
                   delay={isClone ? 0 : stepIndex * 0.08}
+                  disableMobileAnimation
                   className={
                     isClone
                       ? "relative example-slide-clone"
