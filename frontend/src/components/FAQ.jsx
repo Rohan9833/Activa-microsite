@@ -61,7 +61,7 @@ function Item({ item, open, onToggle, id }) {
         className={`grid transition-all duration-300 ${open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
       >
         <div className="overflow-hidden">
-          <p className="px-5 pb-5 text-[17px] leading-relaxed text-navy-500 sm:px-6">{item.a}</p>
+          <p className="px-5 pb-5 text-[17px] leading-relaxed text-navy-500 sm:px-6 lg:text-[15px]">{item.a}</p>
         </div>
       </div>
     </div>
