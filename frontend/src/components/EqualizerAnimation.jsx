@@ -59,7 +59,7 @@ export default function EqualizerAnimation({ alt }) {
     if (swipeStartX.current == null) return;
     const delta = e.changedTouches[0].clientX - swipeStartX.current;
     swipeStartX.current = null;
-    if (Math.abs(delta) < 40) return;
+    if (Math.abs(delta) < 25) return;
     goTo((stepRef.current + (delta < 0 ? 1 : -1) + STEPS.length) % STEPS.length);
   };
 
@@ -67,8 +67,7 @@ export default function EqualizerAnimation({ alt }) {
     if (next === stepRef.current) return;
     setPos(STEPS[next].pos);
     clearTimeout(timer.current);
-    if (reduce) setStep(next);
-    else timer.current = window.setTimeout(() => setStep(next), MOVE_MS);
+    setStep(next);
   };
 
   useEffect(() => {
