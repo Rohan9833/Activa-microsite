@@ -163,7 +163,7 @@
     border-radius: 22px 22px 0 0;
     overflow: hidden;
   }
-  #top .container-site > div:last-child img {
+  #top .container-site > div:last-child picture img {
     display: block;
     width: 100%;
     height: 198px;
@@ -734,7 +734,7 @@
   footer > .container-site > div:first-child {
     gap: 5px;
   }
-  footer > .container-site > div:first-child img {
+  footer > .container-site > div:first-child picture img {
     width: 112px;
   }
   footer > .container-site > div:first-child p {
