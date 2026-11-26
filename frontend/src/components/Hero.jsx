@@ -141,7 +141,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 max-w-xl lg:max-w-none lg:pl-0 lg:pb-0 lg:pt-0"
+          className="relative z-10 max-w-xl lg:max-w-none lg:col-start-1 lg:row-start-1 lg:pl-0 lg:pb-0 lg:pt-0"
         >
           <span className="accent-bar mb-6" aria-hidden="true" />
 
@@ -165,7 +165,7 @@ export default function Hero() {
             </a>
             <a
               href="#experiences"
-              className="btn-secondary w-5 min-[480px]:w-auto"
+              className="btn-secondary w-full min-[480px]:w-auto"
             >
               Explore Experiences
             </a>
