@@ -70,9 +70,17 @@ const STEPS = [
 
 export default function WorkedExample() {
   const [activeStep, setActiveStep] = useState(0);
+  const [trackPosition, setTrackPosition] = useState(1);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
   const touchStartX = useRef(null);
   const touchStartY = useRef(null);
-  const goToStep = (step) => setActiveStep(Math.max(0, Math.min(STEPS.length - 1, step)));
+  const touchMoved = useRef(false);
+
+  const goToStep = (step) => {
+    const next = (step + STEPS.length) % STEPS.length;
+    setActiveStep(next);
+    setTrackPosition(next + 1);
+  };
 
   const handleTouchStart = (event) => {
     const touch = event.touches[0];
@@ -89,11 +97,25 @@ export default function WorkedExample() {
 
     // Only change slides for a deliberate horizontal swipe, not vertical scrolling.
     if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
-      setActiveStep((current) => {\n        if (deltaX < 0) return Math.min(current + 1, STEPS.length - 1);\n        return Math.max(current - 1, 0);\n      });
+      touchMoved.current = true;
+      goToStep(activeStep + (deltaX < 0 ? 1 : -1));
     }
 
     touchStartX.current = null;
     touchStartY.current = null;
+  };
+
+  const handleTrackTransitionEnd = (event) => {
+    if (event.target !== event.currentTarget || !transitionEnabled) return;
+    if (trackPosition === 0) {
+      setTransitionEnabled(false);
+      setTrackPosition(STEPS.length);
+      requestAnimationFrame(() => requestAnimationFrame(() => setTransitionEnabled(true)));
+    } else if (trackPosition === STEPS.length + 1) {
+      setTransitionEnabled(false);
+      setTrackPosition(1);
+      requestAnimationFrame(() => requestAnimationFrame(() => setTransitionEnabled(true)));
+    }
   };
 
   const handleTouchCancel = () => {
@@ -120,9 +142,16 @@ export default function WorkedExample() {
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchCancel}
         >
-          <ol className="example-slides mt-10 grid gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-10" style={{ "--active-slide": activeStep }}>
-          {STEPS.map((s, i) => (
-            <Reveal as="li" key={s.tag} delay={i * 0.08} className="relative">
+          <ol
+            className={`example-slides mt-10 grid gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-10 ${transitionEnabled ? '' : 'example-no-transition'}`}
+            style={{ "--active-slide": trackPosition }}
+            onTransitionEnd={handleTrackTransitionEnd}
+          >
+          {[STEPS[STEPS.length - 1], ...STEPS, STEPS[0]].map((s, trackIndex) => {
+            const isClone = trackIndex === 0 || trackIndex === STEPS.length + 1;
+            const i = (trackIndex - 1 + STEPS.length) % STEPS.length;
+            return (
+            <Reveal as="li" key={`${trackIndex}-${s.tag}`} delay={isClone ? 0 : i * 0.08} className={isClone ? "relative example-slide-clone" : "relative"} aria-hidden={isClone}>
               <div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-[#ECE8FB]">
                 <div className="flex h-[210px] items-center justify-center bg-gradient-to-br from-[#F2F5FF] via-[#F6F2FF] to-[#FCF1FD] px-5">
                   {s.visual}
