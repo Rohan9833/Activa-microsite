@@ -76,7 +76,8 @@
   .activa-slide { animation: none; }
 }
 
-.example-carousel-controls { display: none; }\n.example-slide-clone { display: none; }
+.example-carousel-controls { display: none; }
+.example-slide-clone { display: none; }
 
 /*
  * 375px mobile art direction.
