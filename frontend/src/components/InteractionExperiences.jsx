@@ -45,7 +45,7 @@ export default function InteractionExperiences() {
         <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#F3F5FF] via-[#F7F3FF] to-[#FCF1FD] p-5 ring-1 ring-[#ECE8FB] sm:p-8 lg:p-10">
           <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(221,16,232,0.12),transparent_70%)]" aria-hidden="true" />
 
-          <div className="relative grid gap-3 lg:grid-cols-[220px_1fr] lg:gap-8 xl:grid-cols-[260px_1fr] xl:gap-10">
+          <div className="relative grid gap-3 md:gap-8 lg:grid-cols-[220px_1fr] lg:gap-8 xl:grid-cols-[260px_1fr] xl:gap-10">
             <Reveal className="lg:pt-2">
               <p className="eyebrow">Explore ActiVA</p>
               <span className="accent-bar mt-2" aria-hidden="true" />
