@@ -15,18 +15,26 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-[#ECEEF6] bg-white">
-      <div className="container-site grid gap-8 py-10 md:grid-cols-[1.1fr_1fr] md:items-start">
+      <div className="container-site grid gap-8 py-10 md:grid-cols-[1.1fr_1fr_auto] md:items-start">
         <div className="flex flex-col gap-3 text-center md:text-left">
-          <div className="flex w-full items-center justify-between gap-4">
+          <div className="flex w-full items-center justify-between gap-4 md:justify-start">
             <Logo variant="mark" className="w-[150px] shrink-0" />
             <img
               src="/assets/Productbydigilateral.png"
               alt="Product by Digilateral"
-              className="w-[110px] max-w-[42%] shrink-0 object-contain"
+              className="w-[120px] max-w-[42%] shrink-0 object-contain md:hidden"
             />
           </div>
           <p className="text-[15px] font-medium text-navy-500">Where Physical Interaction Meets Digital Detailing.</p>
           <p className="text-[15px] font-bold text-navy">A {c.company} Solution</p>
+        </div>
+
+        <div className="hidden items-center justify-end md:flex">
+          <img
+            src="/assets/Productbydigilateral.png"
+            alt="Product by Digilateral"
+            className="w-[175px] object-contain"
+          />
         </div>
 
         {(items.length > 0 || c.whatsapp) && (
