@@ -85,7 +85,8 @@ export default function WorkedExample() {
           </p>
         </Reveal>
 
-        <ol className="example-slides mt-10 grid gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-10" style={{ "--active-slide": activeStep }}>
+        <div className="example-carousel-viewport">
+          <ol className="example-slides mt-10 grid gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-10" style={{ "--active-slide": activeStep }}>
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.tag} delay={i * 0.08} className="relative">
               <div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-[#ECE8FB]">
@@ -110,7 +111,8 @@ export default function WorkedExample() {
               )}
             </Reveal>
           ))}
-        </ol>
+          </ol>
+        </div>
 
         <div className="example-carousel-controls" aria-label="Example concept slides">
           <button type="button" onClick={() => goToStep(activeStep - 1)} aria-label="Previous example" className="example-arrow">
