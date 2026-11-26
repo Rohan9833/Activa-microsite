@@ -2,13 +2,16 @@ import 'dotenv/config';
 
 const toInt = (v, d) => (Number.isFinite(parseInt(v, 10)) ? parseInt(v, 10) : d);
 const toBool = (v) => String(v).toLowerCase() === 'true';
+const normalizeOrigin = (value) => {
+  try { return new URL(value.trim()).origin; } catch { return null; }
+};
 
 export const env = {
   nodeEnv: process.env.NODE_ENV || 'development',
   port: toInt(process.env.PORT, 5000),
   corsOrigins: (process.env.CORS_ORIGINS || 'http://localhost:5173')
     .split(',')
-    .map((s) => s.trim())
+    .map(normalizeOrigin)
     .filter(Boolean),
   rateLimitWindowMin: toInt(process.env.RATE_LIMIT_WINDOW_MINUTES, 15),
   rateLimitMax: toInt(process.env.RATE_LIMIT_MAX, 10),
