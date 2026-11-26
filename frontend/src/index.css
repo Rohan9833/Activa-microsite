@@ -826,3 +826,37 @@
   #top h1 { font-size: 31px; }
   #top .container-site > div:last-child img { height: 218px; }
 }
+
+/* Desktop hero correction: keep the headline and CTAs in the left column.
+   These rules do not apply to the mobile redesign below 640px. */
+@media (min-width: 1024px) {
+  #top > .container-site {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+  }
+  #top > .container-site > h1:first-child {
+    display: none !important;
+  }
+  #top > .container-site > div:nth-child(2) {
+    display: none !important;
+  }
+  #top > .container-site > div:last-child {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: 640px;
+    padding-right: 2rem;
+  }
+  #top > .container-site > div:last-child h1 {
+    font-size: clamp(2.7rem, 3.2vw, 3.6rem);
+    line-height: 1.06;
+  }
+  #top > .container-site > div:last-child p {
+    max-width: 34rem;
+  }
+  #top > .container-site > div:last-child > div {
+    flex-wrap: wrap;
+  }
+  #top > .container-site > div:last-child > div a {
+    width: auto;
+  }
+}
