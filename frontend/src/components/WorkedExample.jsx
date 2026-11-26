@@ -72,7 +72,7 @@ export default function WorkedExample() {
   const [activeStep, setActiveStep] = useState(0);
   const touchStartX = useRef(null);
   const touchStartY = useRef(null);
-  const goToStep = (step) => setActiveStep((step + STEPS.length) % STEPS.length);
+  const goToStep = (step) => setActiveStep(Math.max(0, Math.min(STEPS.length - 1, step)));
 
   const handleTouchStart = (event) => {
     const touch = event.touches[0];
@@ -89,7 +89,7 @@ export default function WorkedExample() {
 
     // Only change slides for a deliberate horizontal swipe, not vertical scrolling.
     if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
-      goToStep(activeStep + (deltaX < 0 ? 1 : -1));
+      setActiveStep((current) => {\n        if (deltaX < 0) return Math.min(current + 1, STEPS.length - 1);\n        return Math.max(current - 1, 0);\n      });
     }
 
     touchStartX.current = null;
