@@ -145,14 +145,14 @@ export default function Hero() {
         >
           <span className="accent-bar mb-6" aria-hidden="true" />
 
-          <h1 className="text-[2.35rem] font-extrabold leading-[1.06] tracking-tight text-navy min-[400px]:text-[2.6rem] sm:text-5xl lg:text-[2.7rem] xl:text-[3.3rem]">
+          <h1 className="text-[2.35rem] pl-2 font-extrabold leading-[1.06] tracking-tight text-navy min-[400px]:text-[2.6rem] sm:text-5xl lg:text-[2.7rem] xl:text-[3.3rem]">
             Don&rsquo;t Just Detail.
             <br />
             <span className="text-gradient block pb-1  lg:whitespace-nowrap">
               Let the Doctor Interact.
             </span>
           </h1>
-          <p className="mt-5 max-w-[40rem] text-lg leading-relaxed text-navy-500 sm:text-xl">
+          <p className="mt-5 pl-2 max-w-[40rem] text-lg leading-relaxed text-navy-500 sm:text-xl">
             Transform conventional iPad detailing into participative
             physical-to-digital brand experiences.
           </p>

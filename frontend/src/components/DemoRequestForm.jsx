@@ -143,7 +143,7 @@ export default function DemoRequestForm() {
               </div>
             </div>
             <p className="relative mt-4 text-center text-sm font-semibold text-navy-500">
-              The doctor arranges the cards. The iPad responds.
+              The MR arranges the cards. The iPad responds.
             </p>
           </div>
         </Reveal>
