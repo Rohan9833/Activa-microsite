@@ -1,9 +1,10 @@
 import { Router } from 'express';
+import { env } from '../config/env.js';
 
 const router = Router();
 
 router.get('/', (req, res) => {
-  const configured = Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS && process.env.MAIL_FROM && process.env.DEMO_RECIPIENT_EMAIL);
+  const configured = Boolean(env.smtpHost && env.smtpUser && env.smtpPass && env.mailFrom && env.demoRecipient);
   res.status(configured ? 200 : 503).json({
     success: configured,
     status: configured ? 'ok' : 'not_configured',
