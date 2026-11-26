@@ -103,7 +103,9 @@ export default function InteractionExperiences() {
                 role="tabpanel"
                 aria-labelledby={`tab-${current.id}`}
                 tabIndex={0}
-                className="mt-5"
+                className="mt-5 touch-pan-y"
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
               >
                 <InteractionPreview item={current} index={active} total={INTERACTIONS.length} />
               </div>
